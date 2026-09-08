@@ -7,8 +7,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 a {
   text-decoration: none;
+}
+
+.personal-logo {
+  border-radius: 50%;
+  height: 50px;
 }
 
 
@@ -51,7 +60,10 @@ h1 {
   transform: scale(0.8);
 }
 
-section {}
+section {
+  background-color: rgb(245, 245, 245);
+  transition: all 300ms ease;
+}
 
 input, textarea {
   width: 100%;
@@ -80,24 +92,17 @@ label {
 input:hover, textarea:hover {
   border-color: rgb(175, 132, 199);
 }
+
 input:focus, text-area:focus {
   border-color: rgb(175, 132, 199);
 }
 
-.main__title {
-  font-size: 48px;
-  margin-top: 72px;
-  margin-bottom: 12px;
+
+.title {
+  font-size: 64px;
   text-align: left;
   line-height: 1;
 } 
-
-.title {
-  font-size: 48px;
-  margin-bottom: 12px;
-  text-align: left;
-  line-height: 1;
-}
 
 .orange {
   color: rgb(175, 132, 199) !important;
@@ -124,6 +129,63 @@ input:focus, text-area:focus {
   width: 100%;
 }
 
+
+nav,
+.scroll,
+.header {
+  opacity: 1;
+  visibility: visible;
+  transition: all 600ms 800ms;
+}
+
+
+.modal--open nav,
+.modal--open .scroll,
+.modal--open .header {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 400ms 200ms;
+}
+
+
+.dark-theme .title,
+.dark-theme .section__title,
+.dark-theme .section__subtitle,
+.dark-theme .nav__link--anchor,
+.dark-theme .fa-adjust,
+.dark-theme .header__para
+{
+ color: white;
+}
+
+.dark-theme section {
+  background-color: rgb(6, 6, 97);
+}
+
+.dark-theme #personal-logo {
+  filter: none;
+}
+
+.dark-theme .scroll__icn {
+  border-color: white;
+}
+
+.dark-theme .scroll__icn:after
+.dark-theme .link__hover-effect--black:after {
+  background-color: white;
+}
+
+.dark-theme .link__hover-effect--white:after {
+  background-color: rgb(6, 6, 97);
+}
+
+.dark-theme .mail__btn {
+  background-color: white;
+  color: rgb(6, 6, 97)
+}
+
+
+
 /* LANDING PAGE */
 
 #landing-page {
@@ -144,6 +206,7 @@ input:focus, text-area:focus {
   font-size: 24px;
   line-height: 2;
   max-width: 450px;
+  margin-top: 8px;
 }
 
 .social__list {
@@ -173,9 +236,11 @@ input:focus, text-area:focus {
   border: none;
   background-color: #242424;
   color: white;
-  position: absolute;
+  position: fixed;
   bottom: 32px;
   right: 40px;
+  z-index: 100;
+  box-shadow: 0 12px 30px 0 rgb(0, 0, 0, 0.2);
 }
 
 .scroll {
@@ -265,10 +330,18 @@ nav {
   width: 90%;
   max-width: 1100px;
   height: 700px;
-  box-shadow: 0 20px 80px rgb(0, 0, 0, 0.55);
   border-radius: 20px;
   overflow: hidden;
   display: flex;
+  visibility: hidden;
+  z-index: -1;
+  transition: visibility 1s, z-index 1s, box-shadow 0.5s ease;
+}
+
+.modal--open .modal {
+  z-index: 60;
+  box-shadow: 0 20px 80px rgb(0, 0, 0, 0.55);
+  visibility: visible;
 }
 
 .modal__half {
@@ -277,11 +350,18 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative; 
+  position: relative;
+  transition: all 300ms ease-in; 
+}
+
+.modal--open .modal__about,
+.modal--open .modal__contact {
+  transform: translateX(0%)
 }
 
 .modal__about {
   background-color: rgb(245, 245, 245);
+  transform: translateX(-110%)
  }
 
 .modal__languages {
@@ -325,7 +405,8 @@ nav {
 
 .modal__contact {
   background-color: rgb(6, 6, 97);
-  color: white
+  color: white;
+  transform: translateX(110%)
 }
 
 .modal__title {
@@ -373,7 +454,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: -1;
@@ -394,6 +475,7 @@ nav {
 
 .modal__overlay--visible {
   z-index: 1;
+  display: flex;
 }
 
 
@@ -512,6 +594,7 @@ footer {
 }
 
 .footer__row {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -519,6 +602,7 @@ footer {
 
 .footer__logo--img {
   width: 70px;
+  border-radius: 50%;
 }
 
 .footer__social--list {
@@ -532,4 +616,131 @@ footer {
 .footer__social--link,
 .footer__copyright {
   color: rgb(175, 132, 199);
+}
+
+
+/* 
+
+Shapes 
+
+shapes on the first row
+height = 35vh
+
+shapes on the second row
+height = 70vh
+
+shapes on the third row
+height = 95vh
+
+shapes on the first column
+width = 5vw
+
+shapes on the second column
+width = 50vw
+
+shapes on the third column
+width = 80vw
+
+*/
+
+
+.shape {
+  position: fixed;
+}
+
+
+.shape--0 {
+  top: 15vh;
+  left: 5vw;
+}
+
+.shape--1 {
+  top: 15vh;
+  left: 50vw;
+}
+
+.shape--2 {
+  top: 15vh;
+  left: 80vw;
+}
+
+.shape--3 {
+  top: 50vh;
+  left: 5vw;
+}
+
+.shape--4 {
+  top: 50vh;
+  left: 50vw;
+}
+
+.shape--5 {
+  top: 50vh;
+  left: 80vw;
+}
+
+.shape--6 {
+  top: 80vh;
+  left: 5vw;
+}
+
+.shape--7 {
+  top: 80vh;
+  left: 50vw;
+}
+
+.shape--8 {
+  top: 80vh;
+  left: 80vw;
+}
+
+
+/* small Phones, tablets, large smart phones */
+@media (max-width: 768px) {
+  .title {
+    font-size: 48px;  
+  }
+  .header__para {
+    font-size: 20px;
+  }
+  .modal {
+    top: 0;
+    left: 0;
+    transform: none;
+    height: auto;
+    width: 100%;
+    flex-direction: column-reverse;
+    border-radius: 0;
+  }
+  .modal__half {
+    width: 100%;
+  }
+}
+
+/* small phones */
+@media (max-width: 480px) {
+  .title {
+    font-size: 36px;
+  }
+  .header-para {
+    font-size: 18px;
+  }
+  .nav__link:first-child {
+    display: none;
+  }
+  .project__para {
+    display: none;
+  }
+  .project__description {
+    left: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .project__subtitle {
+    margin-bottom: 8px;
+  }
+  .modal__half {
+    padding: 40px;
+  }
 }
